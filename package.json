@@ -1,0 +1,14 @@
+{
+  "name": "vault-messenger",
+  "version": "1.0.0",
+  "description": "Universal Privacy Protocol",
+  "main": "index.html",
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html dist/"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0"
+  }
+}
