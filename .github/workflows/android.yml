@@ -1,30 +1,42 @@
 name: Build Android APK
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
-      - name: Prepare Assets
+          node-version: 24
+
+      - name: Install & Sync Capacitor
         run: |
           npm install
           npm run build
-          npx cap ios add android || true
+          # This creates the android folder if you haven't pushed it to GitHub
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
           npx cap sync android
-      - uses: actions/setup-java@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
+
       - name: Build APK
         run: |
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
+
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
-          name: Vault-Messenger-Mobile
+          name: Vault-Messenger-4-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
