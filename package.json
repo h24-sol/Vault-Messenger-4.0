@@ -1,8 +1,6 @@
 {
   "name": "vault-messenger",
-  "version": "1.0.0",
-  "description": "Universal Privacy Protocol",
-  "main": "index.html",
+  "version": "4.0.0",
   "scripts": {
     "build": "mkdir -p dist && cp index.html dist/"
   },
